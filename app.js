@@ -27,11 +27,6 @@ db.once("open", () => {
         if (change.operationType == "insert") {
             const message = change.fullDocument;
             pusher.trigger("newMessage", message.roomId, message);
-        } else {
-            console.log(
-                "Error on triggering Pusher on message collection",
-                err
-            );
         }
     });
 
@@ -59,6 +54,8 @@ const joinRoom = require("./routes/joinRoom");
 app.use("/joinRoom", joinRoom);
 const leaveRoom = require("./routes/leaveRoom");
 app.use("/leaveRoom", leaveRoom);
+const clearChat = require("./routes/clearChat");
+app.use("/clearChat", clearChat);
 
 app.get("/", (req, res) => {
     res.send("Hello World");
