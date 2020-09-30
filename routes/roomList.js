@@ -9,10 +9,16 @@ router.get("/:email", async (req, res) => {
             { email: req.params.email },
             { rooms: 1 }
         );
-        const roomList = await Promise.all(user.rooms.map(async (roomId) => {
-            return await Rooms.findOne({_id: roomId});
-        }));
-        res.send(roomList);
+        if (user.rooms) {
+            const roomList = await Promise.all(
+                user.rooms.map(async (roomId) => {
+                    return await Rooms.findOne({ _id: roomId });
+                })
+            );
+            res.send(roomList);
+        } else {
+            res.send([]);
+        }
     } catch (err) {
         console.log(err);
         res.status(500).send(err);

@@ -28,30 +28,17 @@ db.once("open", () => {
             const message = change.fullDocument;
             pusher.trigger("newMessage", message.roomId, message);
         } else {
-            console.log("Error triggering Pusher on message collection");
+            console.log(
+                "Error on triggering Pusher on message collection",
+                err
+            );
         }
     });
 
     const roomCollection = db.collection("rooms");
     const roomStream = roomCollection.watch();
     roomStream.on("change", (change) => {
-        if (
-            change.operationType == "update" &&
-            change.updateDescription.updatedFields.lastMessage
-        ) {
-            pusher.trigger(
-                "lastMessageUpdate",
-                change.documentKey._id,
-                change.updateDescription.updatedFields.lastMessage
-            );
-            pusher.trigger(
-                "lastMessageUpdate",
-                "roomId",
-                change.documentKey._id
-            );
-        } else {
-            console.log("Error on triggering Pusher on room collection");
-        }
+        pusher.trigger("roomsUpdate", "someUpdate", "");
     });
 });
 
