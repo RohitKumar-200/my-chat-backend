@@ -5,7 +5,13 @@ const User = require('../models/user');
 
 router.post('/', async (req, res) => {
     try{
-        const newRoom = new Room(req.body);
+        const roomData = {
+            name: req.body.name,
+            description: req.body.description,
+            pic: req.body.pic,
+            users: [req.body.userEmail],
+        }
+        const newRoom = new Room(roomData);
         const savedRoom = await newRoom.save();
         const updatedUser = await User.updateOne({email: req.body.userEmail},{
             $push: {
