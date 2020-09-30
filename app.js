@@ -55,6 +55,8 @@ const roomMessages = require("./routes/roomMessages");
 app.use("/roomMessages", roomMessages);
 const roomInfo = require("./routes/roomInfo");
 app.use("/roomInfo", roomInfo);
+const joinRoom = require("./routes/joinRoom");
+app.use("/joinRoom", joinRoom);
 
 app.get("/", (req, res) => {
     res.send("Hello World");
