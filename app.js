@@ -57,6 +57,8 @@ const roomInfo = require("./routes/roomInfo");
 app.use("/roomInfo", roomInfo);
 const joinRoom = require("./routes/joinRoom");
 app.use("/joinRoom", joinRoom);
+const leaveRoom = require("./routes/leaveRoom");
+app.use("/leaveRoom", leaveRoom);
 
 app.get("/", (req, res) => {
     res.send("Hello World");
