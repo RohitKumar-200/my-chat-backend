@@ -10,9 +10,9 @@ router.post("/", async (req, res) => {
         const savedMessage = await newMessage.save();
         const updatedRoom = await Rooms.updateOne(
             { _id: mongoose.Types.ObjectId(req.body.roomId) },
-            { lastMessage: req.body.text }
+            { lastMessage: req.body.text, lastTimestamp: Date.now() }
         );
-        res.json({message: savedMessage, room: updatedRoom});
+        res.json({ message: savedMessage, room: updatedRoom });
     } catch (err) {
         console.log(err);
         res.status(500).send(err);
