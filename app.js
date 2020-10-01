@@ -56,6 +56,8 @@ const leaveRoom = require("./routes/leaveRoom");
 app.use("/leaveRoom", leaveRoom);
 const clearChat = require("./routes/clearChat");
 app.use("/clearChat", clearChat);
+const addParticipant = require("./routes/addParticipant");
+app.use("/addParticipant", addParticipant);
 
 app.get("/", (req, res) => {
     res.send("Hello World");
