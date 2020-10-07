@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Rooms = require("../models/room");
 const Users = require("../models/user");
+const mongoose = require("mongoose");
 
 router.post("/", async (req, res) => {
     const roomId = req.body.roomId;
@@ -11,12 +12,12 @@ router.post("/", async (req, res) => {
             { email: email },
             {
                 $pull: {
-                    rooms: roomId,
+                    rooms: mongoose.Types.ObjectId(roomId),
                 },
             }
         );
         const updatedRoom = await Rooms.updateOne(
-            { _id: roomId },
+            { _id: mongoose.Types.ObjectId(roomId) },
             {
                 $pull: {
                     users: email,

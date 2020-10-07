@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Room = require('../models/room');
 const User = require('../models/user');
+const mongoose = require("mongoose");
 
 router.post('/', async (req, res) => {
     try{
@@ -15,7 +16,7 @@ router.post('/', async (req, res) => {
         const savedRoom = await newRoom.save();
         const updatedUser = await User.updateOne({email: req.body.userEmail},{
             $push: {
-                rooms: savedRoom._id
+                rooms: mongoose.Types.ObjectId(savedRoom._id)
             }
         })
         res.json({room: savedRoom, user: updatedUser});
