@@ -18,7 +18,7 @@ This repository includes only back-end part of my-chat application.
 ## Setting up locally
 1. Clone this repository  
 ` git clone https://github.com/RohitKumar-200/my-chat-backend.git `
-2. cd to my-chat-frontend
+2. cd to my-chat-backend
 4. create .env file and add following into it  
    > DB_CONNECTION=(Your mongoDB connection url)  
    > PUSHER_appId=(Pusher app Id)  
